@@ -1,9 +1,14 @@
+import CartModal from './components/CartModal'
 import Header from './components/Header'
-import './App.css'
+import FoodMenu from './components/FoodMenu'
+
 
 function App() {
-
-  return <Header />
+  return <>
+    <CartModal/>
+    <Header/>
+    <FoodMenu />
+  </>
 }
 
 export default App

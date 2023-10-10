@@ -1,8 +1,21 @@
-
+.header {
+    background-color: white;
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
 
 .header nav {
     display: flex;
-    margin-left: 64px;
+    justify-content: space-around;
+}
+
+.user button,
+.cart button{
+    font-size: 1.6rem;
+    margin-left: 6px;
 }
 
 .header nav ul {
@@ -11,7 +24,7 @@
 
 .header .logo {
     font-size: 4rem;
-    background-image: url(https://static.kfcvietnam.com.vn/images/web/kfc-logo.svg?v=5.0);
+    background: url(https://static.kfcvietnam.com.vn/images/web/kfc-logo.svg?v=5.0) no-repeat ;
     width: 78px;
     height: 78px;
     margin: 10px;
@@ -47,3 +60,11 @@
     color: white;
     font-weight: 600;
 }
+
+.header .btn {
+    border-radius: 10px;
+    margin-left: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+

@@ -1,0 +1,49 @@
+
+
+.header nav {
+    display: flex;
+    margin-left: 64px;
+}
+
+.header nav ul {
+    display: flex;
+}
+
+.header .logo {
+    font-size: 4rem;
+    background-image: url(https://static.kfcvietnam.com.vn/images/web/kfc-logo.svg?v=5.0);
+    width: 78px;
+    height: 78px;
+    margin: 10px;
+}
+
+.header ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header ul li a {
+    display: block;
+    padding: 8px;
+    color: #202124;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.header section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    background-color: #202124;
+}
+
+.header p span {
+    font-size: 1.6rem;
+    margin: 8px;
+    color: white;
+    font-weight: 600;
+}

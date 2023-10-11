@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 const FoodMenu = () => {
     return (
-        <div className={classes['mt-24']} >
+        <div className='mt-200' >
             <Container>
                 <Row>
                     <Col md={3} sm={4} className={classes['item-card']} >

@@ -46,6 +46,14 @@
     font-weight: 600;
 }
 
+.header .main-navigation li a:hover {
+    text-decoration: underline;
+}
+
+.header .main-navigation li a.active {
+    text-decoration: underline;
+}
+
 .header section {
     display: flex;
     justify-content: center;

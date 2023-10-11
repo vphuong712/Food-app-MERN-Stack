@@ -7,8 +7,8 @@ import Form from 'react-bootstrap/Form';
 import classes from './AddProduct.module.css';
 
 const FormComponent = () => {
-    const [productFormState, productFormDispatch] = useContext(AddProductFormContext);
-    const { isShow } = productFormState;
+    // const [productFormState, productFormDispatch] = useContext(AddProductFormContext);
+    // const { isShow } = productFormState;
     const [validated, setValidated] = useState(false);
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -22,7 +22,7 @@ const FormComponent = () => {
 
     return (
         <>
-            <Modal show={isShow} onHide={() => {productFormDispatch({type: 'HIDE'})}} style={{zIndex: '999999'}}>
+            <Modal show={true} style={{zIndex: '999999'}}>
                 <Modal.Header>
                     <Modal.Title>Thêm sản phẩm</Modal.Title>
                 </Modal.Header>
@@ -60,7 +60,7 @@ const FormComponent = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => {productFormDispatch({type: 'HIDE'})}}>
+                    <Button variant="secondary">
                         Close
                     </Button>
                 </Modal.Footer>

@@ -1,37 +1,38 @@
-import CartContext from '../store/CartContext';
-import AddProductFormContext from '../store/AddProductFormContext';
-import { useContext } from 'react';
+// import CartContext from '../store/CartContext';
+// import AddProductFormContext from '../store/AddProductFormContext';
+// import { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import classes from './Header.module.css';
 import Button from 'react-bootstrap/Button'
 import Badge from 'react-bootstrap/Badge';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { NavLink, Link } from 'react-router-dom';
 
 
 
 const Header = () => {
-    const [state, dispatch] = useContext(CartContext);
-    const [productFormState, productFormDispatch] = useContext(AddProductFormContext);
+    // const [state, dispatch] = useContext(CartContext);
+    // const [productFormState, productFormDispatch] = useContext(AddProductFormContext);
 
 
 
     return <header className={classes.header}>
         <nav>
-            <ul>
-                <li><a href="/" className={classes.logo} ></a></li>
-                <li><a href="">THỰC ĐƠN</a></li>
-                <li><a href="">KHUYẾN MÃI</a></li>
-                <li><a href="">DỊCH VỤ TIỆC</a></li>
-                <li><a href="">HỆ THỐNG NHÀ HÀNG</a></li>
-            </ul>
+            <ul className={classes['main-navigation']} >
+                <li><Link to="" className={classes.logo} ></Link></li>
+                <li><NavLink className={({ isActive }) => isActive ? classes.active : ''} to="">THỰC ĐƠN</NavLink></li>
+                <li><NavLink className={({ isActive }) => isActive ? classes.active : ''} to="discount">KHUYẾN MÃI</NavLink></li>
+                <li><NavLink className={({ isActive }) => isActive ? classes.active : ''} to="book-party">DỊCH VỤ TIỆC</NavLink></li>
+                <li><NavLink className={({ isActive }) => isActive ? classes.active : ''} to="restaurant">HỆ THỐNG NHÀ HÀNG</NavLink></li>
+            </ul>   
             <ul>
                 <li className={classes.user} >
                     <NavDropdown title="Admin" id="basic-nav-dropdown">
-                        <NavDropdown.Item onClick={() => {productFormDispatch({type: 'SHOW'})}} >Thêm món ăn</NavDropdown.Item>    
+                        <NavDropdown.Item>Thêm món ăn</NavDropdown.Item>    
                     </NavDropdown>
                 </li>
                 <li className={classes.cart}>
-                    <Button onClick={() => {dispatch({type: 'SHOW'})}}  variant="outline-danger">
+                    <Button variant="outline-danger">
                         Shop <Badge bg="secondary">0</Badge>
                     </Button>
                 </li>

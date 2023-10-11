@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import ModalContext from "./ModalContext";
+import CartContext from "./CartContext";
 
 const initState = {
     isShow: false,
@@ -20,14 +20,14 @@ const reducer = (state, action) => {
     }
 }
 
-const ModalProvider = (props) => {
+const CartProvider = (props) => {
     const [state, dispatch] = useReducer(reducer, initState);
 
     return (
-        <ModalContext.Provider value={[state, dispatch]}>
+        <CartContext.Provider value={[state, dispatch]}>
             {props.children}
-        </ModalContext.Provider>
+        </CartContext.Provider>
     )
 }
 
-export default ModalProvider;
+export default CartProvider;

@@ -1,4 +1,5 @@
-import ModalContext from '../store/ModalContext';
+import CartContext from '../store/CartContext';
+import AddProductFormContext from '../store/AddProductFormContext';
 import { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import classes from './Header.module.css';
@@ -9,7 +10,10 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 const Header = () => {
-    const [state, dispatch] = useContext(ModalContext);
+    const [state, dispatch] = useContext(CartContext);
+    const [productFormState, productFormDispatch] = useContext(AddProductFormContext);
+
+
 
     return <header className={classes.header}>
         <nav>
@@ -23,7 +27,7 @@ const Header = () => {
             <ul>
                 <li className={classes.user} >
                     <NavDropdown title="Admin" id="basic-nav-dropdown">
-                        <NavDropdown.Item>Thêm món ăn</NavDropdown.Item>    
+                        <NavDropdown.Item onClick={() => {productFormDispatch({type: 'SHOW'})}} >Thêm món ăn</NavDropdown.Item>    
                     </NavDropdown>
                 </li>
                 <li className={classes.cart}>

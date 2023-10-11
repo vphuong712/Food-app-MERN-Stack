@@ -1,12 +1,12 @@
-import ModalContext from '../store/ModalContext';
+import CartContext from '../store/CartContext';
 import { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import classes from './CartModal.module.css';
+import classes from './Cart.module.css';
 
 const CartModal = () => {
-  const [state, dispatch] = useContext(ModalContext);
+  const [state, dispatch] = useContext(CartContext);
   const { isShow } = state;
   return (
     <>

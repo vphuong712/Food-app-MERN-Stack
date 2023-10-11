@@ -1,4 +1,4 @@
-import CartModal from './components/CartModal'
+import Cart from './components/Cart'
 import AddProduct from './components/AddProduct'
 import Header from './components/Header'
 import FoodMenu from './components/FoodMenu'
@@ -7,7 +7,7 @@ import FoodMenu from './components/FoodMenu'
 function App() {
   return <>
     <AddProduct/>
-    <CartModal/>
+    <Cart/>
     <Header/>
     <FoodMenu />
   </>

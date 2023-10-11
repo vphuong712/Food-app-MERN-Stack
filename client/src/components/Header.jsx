@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import classes from './Header.module.css';
 import Button from 'react-bootstrap/Button'
 import Badge from 'react-bootstrap/Badge';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 
@@ -21,7 +22,9 @@ const Header = () => {
             </ul>
             <ul>
                 <li className={classes.user} >
-                    <Button variant="outline-danger">Admin</Button>
+                    <NavDropdown title="Admin" id="basic-nav-dropdown">
+                        <NavDropdown.Item>Thêm món ăn</NavDropdown.Item>    
+                    </NavDropdown>
                 </li>
                 <li className={classes.cart}>
                     <Button onClick={() => {dispatch({type: 'SHOW'})}}  variant="outline-danger">

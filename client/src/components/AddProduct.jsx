@@ -1,5 +1,6 @@
-import { useState, useContext } from 'react';
-import AddProductFormContext from '../store/AddProductFormContext';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { showing, hide } from '../features/modals/addProductFormSlice.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -7,8 +8,10 @@ import Form from 'react-bootstrap/Form';
 import classes from './AddProduct.module.css';
 
 const FormComponent = () => {
-    // const [productFormState, productFormDispatch] = useContext(AddProductFormContext);
-    // const { isShow } = productFormState;
+    const show = useSelector((state) => state.addProduct.show)
+    const dispatch = useDispatch();
+    
+
     const [validated, setValidated] = useState(false);
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -22,7 +25,7 @@ const FormComponent = () => {
 
     return (
         <>
-            <Modal show={true} style={{zIndex: '999999'}}>
+            <Modal show={show} onHide={() => dispatch(hide())} style={{zIndex: '999999'}}>
                 <Modal.Header>
                     <Modal.Title>Thêm sản phẩm</Modal.Title>
                 </Modal.Header>
@@ -60,7 +63,7 @@ const FormComponent = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary">
+                    <Button variant="secondary" onClick={() => dispatch(hide())}>
                         Close
                     </Button>
                 </Modal.Footer>

@@ -1,18 +1,18 @@
-// import CartContext from '../store/CartContext';
-// import AddProductFormContext from '../store/AddProductFormContext';
-// import { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import classes from './Header.module.css';
 import Button from 'react-bootstrap/Button'
 import Badge from 'react-bootstrap/Badge';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { showing } from '../features/modals/addProductFormSlice';
+import { showing as showCart } from '../features/modals/cartSlice';
 
 
 
 const Header = () => {
-    // const [state, dispatch] = useContext(CartContext);
-    // const [productFormState, productFormDispatch] = useContext(AddProductFormContext);
+
+    const dispatch = useDispatch();
 
 
 
@@ -28,11 +28,11 @@ const Header = () => {
             <ul>
                 <li className={classes.user} >
                     <NavDropdown title="Admin" id="basic-nav-dropdown">
-                        <NavDropdown.Item>Thêm món ăn</NavDropdown.Item>    
+                        <NavDropdown.Item onClick={() => dispatch(showing())} >Thêm món ăn</NavDropdown.Item>    
                     </NavDropdown>
                 </li>
                 <li className={classes.cart}>
-                    <Button variant="outline-danger">
+                    <Button onClick={() => dispatch(showCart())} variant="outline-danger">
                         Shop <Badge bg="secondary">0</Badge>
                     </Button>
                 </li>

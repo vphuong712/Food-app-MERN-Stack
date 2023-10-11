@@ -1,22 +1,23 @@
-import CartContext from '../store/CartContext';
-import { useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { showing, hide } from '../features/modals/cartSlice';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import classes from './Cart.module.css';
 
 const CartModal = () => {
-  const [state, dispatch] = useContext(CartContext);
-  const { isShow } = state;
+  const show = useSelector((state) => state.cart.show);
+  const dispatch = useDispatch();
+
   return (
     <>
-      <Modal className={classes.cart} show={isShow} onHide={() => {dispatch({ type: 'HIDE' })}} style={{zIndex: '999999'}} >
+      <Modal className={classes.cart} show={show} onHide={() => dispatch(hide())}  style={{zIndex: '999999'}} >
         <Modal.Header closeButton>
           <Modal.Title>Cart</Modal.Title>
         </Modal.Header>
         <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
         <Modal.Footer>
-          <Button className={classes.btn} size='lg' variant="secondary" onClick={() => {dispatch({type: 'HIDE'})}}>
+          <Button className={classes.btn} size='lg' variant="secondary" onClick={() => dispatch(hide())}>
             Close
           </Button>
           <Button className={classes.btn} size='lg' variant="danger">

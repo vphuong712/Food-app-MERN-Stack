@@ -4,7 +4,7 @@ const initialState = {
     show: false,
 }
 
-export const addProductFormSlice = createSlice({
+const addProductFormSlice = createSlice({
     name: 'add-product-form',
     initialState,
     reducers: {

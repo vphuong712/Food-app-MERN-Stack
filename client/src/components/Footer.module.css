@@ -1,0 +1,31 @@
+footer {
+    margin-top: 50px;
+    background-color: #202124;
+    min-height: 500px;
+}
+
+footer .col {
+    margin-top: 40px;
+}
+
+footer h3 {
+    color: white;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: #ABABABAB;
+    font-size: 1.6rem;
+}
+
+footer ul li a:hover {
+    color: white;
+}
+
+footer p {
+    margin-top: 200px;
+    text-align: center;
+    color: #ABABABAB;
+    font-size: 1.4rem;
+}
+

@@ -1,3 +1,4 @@
+
 *{ 
     margin: 0;
     padding: 0;
@@ -8,11 +9,16 @@
 }
 
 ul {
+    padding: 0;
     list-style: none;
 }
 
-.mt-200 {
-    margin-top: 200px;
+p {
+    margin: 0;
+}
+
+.mt-220 {
+    margin-top: 220px;
 }
 
 .text-center {

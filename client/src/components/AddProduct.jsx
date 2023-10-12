@@ -27,38 +27,47 @@ const FormComponent = () => {
         <>
             <Modal show={show} onHide={() => dispatch(hide())} style={{zIndex: '999999'}}>
                 <Modal.Header>
-                    <Modal.Title>Thêm sản phẩm</Modal.Title>
+                    <Modal.Title>Add New Product</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form noValidate validated={validated} className={classes.form} onSubmit={handleSubmit} >
                         <Form.Group className={`mb3 ${classes['form-group']}`}>
-                            <Form.Label>Link Ảnh</Form.Label>
+                            <Form.Label>Image Link</Form.Label>
                             <Form.Control type="text"
-                            placeholder="Nhập Link ảnh"
+                            placeholder="Add link of image"
                             required
                             />
                             <Form.Control.Feedback type="invalid">You need type this input!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group className={`mb3 ${classes['form-group']}`}>
-                            <Form.Label>Giá sản phẩm</Form.Label>
+                            <Form.Label>Title</Form.Label>
                             <Form.Control 
                             type="text"
-                            placeholder="Nhập giá sản phẩm" 
+                            placeholder="Add title" 
                             required
                             />
                             <Form.Control.Feedback type="invalid">You need type this input!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group className={`mb3 ${classes['form-group']}`}>
-                            <Form.Label>Mô tả</Form.Label>
+                            <Form.Label>Price</Form.Label>
+                            <Form.Control 
+                            type="text"
+                            placeholder="Add price" 
+                            required
+                            />
+                            <Form.Control.Feedback type="invalid">You need type this input!</Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group className={`mb3 ${classes['form-group']}`}>
+                            <Form.Label>Description</Form.Label>
                             <Form.Control 
                             type="text" 
-                            placeholder="Nhập mô tả"
+                            placeholder="Add description"
                             required
                             />
                             <Form.Control.Feedback type="invalid">You need type this input!</Form.Control.Feedback>
                         </Form.Group>
                         <Button variant="danger" type='submit' size='lg' >
-                            Lưu
+                            Save
                         </Button>
                     </Form>
                 </Modal.Body>

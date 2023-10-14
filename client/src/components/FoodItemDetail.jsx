@@ -5,11 +5,24 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import classes from './FoodItemDetail.module.css';
 import { useLoaderData } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../features/cart/cartSlice';
 
 
 const FoodItemDetail = () => {
     const data = useLoaderData();
     const food = data.data;
+    const dispatch = useDispatch();
+
+    const addItemHandler = () => {
+        dispatch(addItemToCart({
+            id: food._id,
+            title: food.title,
+            image: food.imageUrl,
+            price: food.price,
+            quantity: 1
+        }))
+    }
 
     return (
         <div className='mt-220'>
@@ -27,7 +40,7 @@ const FoodItemDetail = () => {
                                 <Card.Text>
                                     {food.description}
                                 </Card.Text>
-                                <Button href="#" size='lg' variant='danger' className={classes.btn} >Add</Button>
+                                <Button onClick={addItemHandler} size='lg' variant='danger' className={classes.btn} >Add</Button>
                             </Card.Body>
                         </Card>
                     </Col>

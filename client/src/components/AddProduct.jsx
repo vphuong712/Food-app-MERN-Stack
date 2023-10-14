@@ -106,6 +106,8 @@ const FormComponent = () => {
             <Form.Control 
             type="number"
             placeholder="Add price" 
+            min="0"
+            max="999999"
             required
             onChange={priceChangeHandler}
             />

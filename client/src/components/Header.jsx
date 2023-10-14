@@ -4,14 +4,19 @@ import Badge from 'react-bootstrap/Badge';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CarIcon from './UI/CartIcon';
 import { NavLink, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useSelector ,useDispatch } from 'react-redux';
 import { showing } from '../features/modals/addProductFormSlice';
-import { showing as showCart } from '../features/modals/cartSlice';
+import { showing as showCart } from '../features/cart/cartSlice';
 
 
 
 const Header = () => {
 
+    const products = useSelector((state) => state.cart.products);
+    let totalQuantity = 0;
+    if(products.length > 0) {
+        totalQuantity = products.reduce((acc, product) => acc + product.quantity, 0);
+    }
     const dispatch = useDispatch();
 
 
@@ -34,7 +39,7 @@ const Header = () => {
                 <li className={classes.cart}>
                     <Button onClick={() => dispatch(showCart())} variant="outline-danger">
                         <CarIcon />
-                        <Badge className={classes.quantity} bg="secondary">0</Badge>
+                        <Badge className={classes.quantity} bg="secondary">{totalQuantity}</Badge>
                     </Button>
                 </li>
             </ul>

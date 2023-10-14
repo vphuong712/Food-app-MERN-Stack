@@ -1,18 +1,45 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addItemToCart, reduceItemFromCart } from '../features/cart/cartSlice';
 import classes from './CartItem.module.css';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/esm/Badge';
+import { formatPrice } from '../util/format';
 
-const CartItem = () => {
+
+const CartItem = (props) => {
+    const dispatch = useDispatch()
+
+    const addEventHandler = () => {
+      dispatch(addItemToCart({
+        id: props.id,
+        image: props.image,
+        title: props.title,
+        price: props.price / props.quantity,
+        quantity: 1
+      }));
+    }
+
+    const reduceItemHandler = () => {
+      dispatch(reduceItemFromCart({
+        id: props.id,
+        image: props.image,
+        title: props.title,
+        price: props.price / props.quantity,
+        quantity: 1
+      }))
+    }
+
     return (
       <div className={classes['cart-item']} >
-        <img src="https://static.kfcvietnam.com.vn/images/items/lg/Rice-F.Chicken.jpg?v=4BJPY4" alt="" />
-        <h2>Combo Happy Meal 99k</h2>
+        <img src={props.image} alt="" />
+        <h2>{props.title}</h2>
         <div>
-          <Button variant='danger' >-</Button>
-          <input value='1' type="text" />
-          <Button variant='danger' >+</Button>
+          <Button onClick={reduceItemHandler} variant='danger' >-</Button>
+          <Badge bg='light' className={classes.quantity}>{props.quantity}</Badge>
+          <Button onClick={addEventHandler} variant='danger' >+</Button>
         </div>
-        <p>18.000</p>
+        <p>{`${formatPrice(props.price)}đ`}</p>
       </div>
     );
 }

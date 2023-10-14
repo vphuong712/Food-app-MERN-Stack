@@ -1,3 +1,6 @@
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../features/cart/cartSlice';
+import { formatPrice } from '../util/format'
 import classes from './FoodItem.module.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -5,7 +8,16 @@ import { Link } from 'react-router-dom';
 
 const FoodItem = (props) => {
 
-    const formatPrice =  new Intl.NumberFormat('en-IN').format(props.price);
+    const dispatch = useDispatch();
+    const addEventHandler = () => {
+        dispatch(addItemToCart({
+            id: props.id,
+            image: props.image,
+            title: props.title,
+            price: props.price,
+            quantity: 1
+        }))
+    }
 
     return ( 
         <Card className={classes['item-card']}>
@@ -16,14 +28,14 @@ const FoodItem = (props) => {
                             {props.title}
                     </Card.Title>
                     <Card.Text className={classes.price} >
-                        {`${formatPrice}đ`}
+                        {`${formatPrice(props.price)}đ`}
                     </Card.Text>
                     <Card.Text className={classes.description} >
                         {props.description}
                     </Card.Text>
                 </Link>
                 <div className='d-grid' >
-                    <Button size='lg' variant='danger' className={classes.btn} >Add</Button>
+                    <Button onClick={addEventHandler} size='lg' variant='danger' className={classes.btn} >Add</Button>
                 </div>
             </Card.Body>
         </Card>

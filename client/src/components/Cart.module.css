@@ -6,3 +6,15 @@
     overflow-y: scroll;
     max-height: 320px;
 }
+
+.cart .total-price {
+    font-weight: 600;
+    position: absolute;
+    left: 0;
+    margin-left: 8px;
+    font-size: 1.75rem;
+}
+
+.cart .btn {
+    font-weight: 600;
+}

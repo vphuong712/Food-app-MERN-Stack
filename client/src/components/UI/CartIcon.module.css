@@ -1,0 +1,9 @@
+.cart-icon {
+    width: 30px;
+    height: 43px;
+    background: url(https://static.kfcvietnam.com.vn/images/web/cart.png?v=5.0) no-repeat -53px 1px;
+    background-size: 350%;
+    text-align: center;
+    line-height: 50px;
+    font-family: Roboto,sans-serif;
+}

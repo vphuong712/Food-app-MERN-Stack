@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { showing, hide } from '../features/modals/cartSlice';
+import CartItem from './CartItem';
+import CarIcon from './UI/CartIcon';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import classes from './Cart.module.css';
@@ -12,15 +14,20 @@ const CartModal = () => {
     <>
       <Modal className={classes.cart} show={show} onHide={() => dispatch(hide())}  style={{zIndex: '999999'}} >
         <Modal.Header closeButton>
-          <Modal.Title>Cart</Modal.Title>
+          <Modal.Title>
+            <CarIcon />
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Body className={classes.body} >
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+        </Modal.Body>
         <Modal.Footer>
-          <Button className={classes.btn} size='lg' variant="secondary" onClick={() => dispatch(hide())}>
-            Close
-          </Button>
           <Button className={classes.btn} size='lg' variant="danger">
-            Save
+            Order
           </Button>
         </Modal.Footer>
       </Modal>

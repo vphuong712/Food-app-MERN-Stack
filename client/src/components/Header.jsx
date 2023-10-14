@@ -2,6 +2,7 @@ import classes from './Header.module.css';
 import Button from 'react-bootstrap/Button'
 import Badge from 'react-bootstrap/Badge';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import CarIcon from './UI/CartIcon';
 import { NavLink, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { showing } from '../features/modals/addProductFormSlice';
@@ -32,7 +33,8 @@ const Header = () => {
                 </li>
                 <li className={classes.cart}>
                     <Button onClick={() => dispatch(showCart())} variant="outline-danger">
-                        Cart <Badge bg="secondary">0</Badge>
+                        <CarIcon />
+                        <Badge className={classes.quantity} bg="secondary">0</Badge>
                     </Button>
                 </li>
             </ul>

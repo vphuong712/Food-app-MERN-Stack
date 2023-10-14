@@ -2,3 +2,7 @@
     font-size: 7rem;
 }
 
+.cart .body {
+    overflow-y: scroll;
+    max-height: 320px;
+}

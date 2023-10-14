@@ -3,20 +3,23 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
-const FoodItem = () => {
+const FoodItem = (props) => {
+
+    const formatPrice =  new Intl.NumberFormat('en-IN').format(props.price);
+
     return ( 
         <Card className={classes['item-card']}>
             <Card.Body>
-                <Link to='menu/1'>
-                    <Card.Img variant="top" src="https://static.kfcvietnam.com.vn/images/items/lg/combo1010.jpg?v=LDoDO3" alt="" />
+                <Link to={`menu/${props.id}`}>
+                    <Card.Img className={classes.image} variant="top" src={props.image} alt="" />
                     <Card.Title className={classes.title} >
-                            Combo Lunch-Fried Chicken Rice
+                            {props.title}
                     </Card.Title>
                     <Card.Text className={classes.price} >
-                        99.000đ
+                        {`${formatPrice}đ`}
                     </Card.Text>
                     <Card.Text className={classes.description} >
-                        1 Rice F.Chicken + 1 Lipton (L). *Applicable only from 10:00 - 14:00, from Monday to Friday of the week.
+                        {props.description}
                     </Card.Text>
                 </Link>
                 <div className='d-grid' >

@@ -9,3 +9,9 @@
 .form-group input {
     padding: 8px;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,4 +1,6 @@
 .item-card {
+    z-index: 1;
+    overflow: hidden;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
 }
 
@@ -14,7 +16,17 @@
     padding: 4px 0;
 }
 
+.item-card .image {
+    transition: 0.5s all ease-in-out;
+}
+
+.item-card .image:hover {
+    transform: scale(1.02);
+}
+
 .item-card .description {
+    min-height: 40px;
+    margin-bottom: 8px;
     font-size: 1.4rem;
     color: #6b6e79;
 }

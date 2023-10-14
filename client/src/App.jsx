@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from './pages/Root.jsx';
-import FoodMenuPage from './pages/FoodMenuPage.jsx';
+import FoodMenuPage, { loader as FoodMenuLoader } from './pages/FoodMenuPage.jsx';
 import DiscountPage from './pages/DiscountPage.jsx';
 import BookPartyPage from './pages/BookParty.jsx';
-import FoodItemDetailPage from './pages/FoodItemDetailPage';
+import FoodItemDetailPage, { loader as FoodItemDetailLoader } from './pages/FoodItemDetailPage';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -13,10 +13,12 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <FoodMenuPage />,
+        loader: FoodMenuLoader
       },
       {
         path: 'menu/:foodId',
         element: <FoodItemDetailPage />,
+        loader: FoodItemDetailLoader
       },
       {
         path: 'deals',

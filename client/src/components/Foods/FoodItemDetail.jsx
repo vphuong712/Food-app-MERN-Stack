@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import classes from './FoodItemDetail.module.css';
 import { useLoaderData } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addItemToCart } from '../features/cart/cartSlice';
+import { addItemToCart } from '../../features/cart/cartSlice';
 
 
 const FoodItemDetail = () => {

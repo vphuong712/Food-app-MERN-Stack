@@ -1,4 +1,4 @@
-import FoodItemDetail from "../components/FoodItemDetail";
+import FoodItemDetail from "../components/Foods/FoodItemDetail";
 import axios from "axios";
 
 const FoodItemDetailPage = () => {

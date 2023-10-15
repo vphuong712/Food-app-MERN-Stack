@@ -4,7 +4,7 @@ import Badge from 'react-bootstrap/Badge';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CarIcon from './UI/CartIcon';
 import { NavLink, Link } from 'react-router-dom';
-import { useSelector ,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { showing } from '../features/modals/addProductFormSlice';
 import { showing as showCart } from '../features/cart/cartSlice';
 

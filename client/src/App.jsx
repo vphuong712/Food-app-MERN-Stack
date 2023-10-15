@@ -5,10 +5,13 @@ import FoodMenuPage, { loader as FoodMenuLoader } from './pages/FoodMenuPage.jsx
 import DiscountPage from './pages/DiscountPage.jsx';
 import BookPartyPage from './pages/BookParty.jsx';
 import FoodItemDetailPage, { loader as FoodItemDetailLoader } from './pages/FoodItemDetailPage';
+import ErrorPage from './pages/ErrorPage.jsx';
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,

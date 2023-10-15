@@ -1,4 +1,4 @@
-import FoodMenu from "../components/FoodMenu";
+import FoodMenu from "../components/Foods/FoodMenu";
 import axios from "axios";
 
 
@@ -11,5 +11,7 @@ export default FoodMenuPage;
 
 export const loader = async () => {
     const response = await axios.get('http://localhost:8080/menu');
-    return response.data;
+    if(response.status === 200) {
+        return response.data;
+    }
 };

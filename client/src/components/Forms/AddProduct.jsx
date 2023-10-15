@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { showing, hide } from '../features/modals/addProductFormSlice.js';
+import { showing, hide } from '../../features/modals/addProductFormSlice.js';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import Loading from './UI/Loading.jsx';
+import Loading from '../UI/Loading.jsx';
 import axios from 'axios'
 import classes from './AddProduct.module.css';
 

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { addItemToCart } from '../features/cart/cartSlice';
-import { formatPrice } from '../util/format'
+import { addItemToCart } from '../../features/cart/cartSlice';
+import { formatPrice } from '../../util/format'
 import classes from './FoodItem.module.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';

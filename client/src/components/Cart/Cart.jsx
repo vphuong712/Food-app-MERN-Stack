@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { showing, hide } from '../features/cart/cartSlice';
+import { showing, hide } from '../../features/cart/cartSlice';
 import CartItem from './CartItem';
-import CarIcon from './UI/CartIcon';
-import { formatPrice } from '../util/format';
+import CarIcon from '../UI/CartIcon';
+import { formatPrice } from '../../util/format';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import classes from './Cart.module.css';
 
-const CartModal = () => {
+const Cart = () => {
   const { show, products } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const CartModal = () => {
 
   return (
     <>
-      <Modal className={classes.cart} show={show} onHide={() => dispatch(hide())}  style={{zIndex: '999999'}} >
+      <Modal className={classes.cart} show={show} onHide={() => dispatch(hide())}>
         <Modal.Header closeButton>
           <Modal.Title>
             <CarIcon />
@@ -48,4 +48,4 @@ const CartModal = () => {
   );
 }
 
-export default CartModal;
+export default Cart;

@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addItemToCart, reduceItemFromCart } from '../features/cart/cartSlice';
+import { addItemToCart, reduceItemFromCart } from '../../features/cart/cartSlice';
 import classes from './CartItem.module.css';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/esm/Badge';
-import { formatPrice } from '../util/format';
+import { formatPrice } from '../../util/format';
 
 
 const CartItem = (props) => {

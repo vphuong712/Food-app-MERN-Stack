@@ -23,7 +23,9 @@
 
 .cart .quantity {
     margin-left: 8px;
+
 }
+
 
 .header nav ul {
     display: flex;
@@ -82,4 +84,3 @@
     font-size: 1.6rem;
     font-weight: 600;
 }
-

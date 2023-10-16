@@ -5,6 +5,7 @@ import FoodMenuPage, { loader as FoodMenuLoader } from './pages/FoodMenuPage.jsx
 import DiscountPage from './pages/DiscountPage.jsx';
 import BookPartyPage from './pages/BookParty.jsx';
 import FoodItemDetailPage, { loader as FoodItemDetailLoader } from './pages/FoodItemDetailPage';
+import EditProductPage, { loader as EditProductLoader } from './pages/EditProductPage.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 
 const router = createBrowserRouter([
@@ -21,7 +22,12 @@ const router = createBrowserRouter([
       {
         path: 'menu/:foodId',
         element: <FoodItemDetailPage />,
-        loader: FoodItemDetailLoader
+        loader: FoodItemDetailLoader,
+      },
+      {
+        path: 'menu/:foodId/edit',
+        element: <EditProductPage />,
+        loader: EditProductLoader
       },
       {
         path: 'deals',

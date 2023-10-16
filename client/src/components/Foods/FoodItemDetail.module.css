@@ -13,6 +13,26 @@
     font-weight: 700;
 }
 
+.block-item .btn-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.block-item .btn-wrap button {
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin: 20px 12px;
+}
+
+.block-item .btn-wrap button a{
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin: 20px 12px;
+}
+
 .block-item .card-item p {
     color: #78838c;
     padding: 8px;

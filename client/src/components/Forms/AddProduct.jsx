@@ -22,7 +22,7 @@ const FormComponent = () => {
     })
 
     const [isLoading, setIsLoading] = useState(false);
-    const errMessage = 'You need type this input!'
+    const [errMessage, setErrMessage] = useState('');
     const imgUrlChangeHandler = (e) => {
         setInputValue({
             ...inputValue,
@@ -66,14 +66,15 @@ const FormComponent = () => {
         }
         setIsLoading(true);
         const postData = async () => {
-            
-            const response = await axios.post('http://localhost:8080/menu', inputValue);
-            if(response.status === 201) {
+            try {
+                const response = await axios.post('http://localhost:8080/menu', inputValue);
                 setIsLoading(false);
                 setValidated(false);
                 alert(response.data.message);
-            } else {
-                alert('Something went wrong!');
+            } catch(error) {
+                setIsLoading(false);
+                setValidated(false);
+                setErrMessage(error.message);
             }
         }
         postData();
@@ -81,6 +82,7 @@ const FormComponent = () => {
 
     const form = (
     <Form method='post' noValidate validated={validated} className={classes.form} onSubmit={handleSubmit} >
+        <p className={classes['err-message']} >{errMessage}</p>
         <Form.Group className={`mb3 ${classes['form-group']}`}>
             <Form.Label>Image Link</Form.Label>
             <Form.Control 
@@ -89,7 +91,7 @@ const FormComponent = () => {
             required
             onChange={imgUrlChangeHandler}
             />
-            <Form.Control.Feedback type="invalid">{errMessage}</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">'You need type this input!'</Form.Control.Feedback>
         </Form.Group>
         <Form.Group className={`mb3 ${classes['form-group']}`}>
             <Form.Label>Title</Form.Label>
@@ -99,7 +101,7 @@ const FormComponent = () => {
             required
             onChange={tittleChangeHandler}
             />
-            <Form.Control.Feedback type="invalid">{errMessage}</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">You need type this input!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group className={`mb3 ${classes['form-group']}`}>
             <Form.Label>Price</Form.Label>
@@ -111,7 +113,7 @@ const FormComponent = () => {
             required
             onChange={priceChangeHandler}
             />
-            <Form.Control.Feedback type="invalid">{errMessage}</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">You need type this input!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group className={`mb3 ${classes['form-group']}`}>
             <Form.Label>Description</Form.Label>
@@ -121,7 +123,7 @@ const FormComponent = () => {
             required
             onChange={descriptionChangeHandler}
             />
-            <Form.Control.Feedback type="invalid">{errMessage}</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">You need type this input!</Form.Control.Feedback>
         </Form.Group>
         <Button variant="danger" type='submit' size='lg' >
             Save

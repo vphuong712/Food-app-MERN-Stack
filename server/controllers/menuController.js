@@ -24,8 +24,6 @@ export const createFood = async (req, res) => {
     const title = req.body.title
     const price = +req.body.price
     const description = req.body.description
-    console.log(typeof price);
-    console.log(req.body);
 
     try {
         if(price) {
@@ -42,3 +40,29 @@ export const createFood = async (req, res) => {
         res.status(500).json(error);
     }
 };
+
+export const updateFood = async (req, res) => {
+    const id = req.params.foodId;
+    const imageUrl = req.body.imageUrl
+    const title = req.body.title
+    const price = +req.body.price
+    const description = req.body.description
+    console.log(req.body);
+
+    try {
+        if(imageUrl !== '' && title !== '' && description !== '' && price > 0) {
+            await Menu.findOneAndUpdate({ _id: id }, {
+                title: title,
+                price: price,
+                description: description,
+                imageUrl: imageUrl
+            })
+            res.status(200).json({ message: 'Success!'});
+        } else {
+            res.status(422).json({ message: 'Invalid Input!' });   
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}

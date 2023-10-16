@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import classes from './FoodItemDetail.module.css';
+import { Link } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../../features/cart/cartSlice';
@@ -30,6 +31,12 @@ const FoodItemDetail = () => {
                 <Row>
                     <Col md={{ span: 4, offset: 2 }} >
                         <img src={food.imageUrl} alt=""/>
+                        <div className={classes['btn-wrap']} >
+                            <Button variant="danger" size='lg' >
+                                <Link to='edit' >Edit</Link>
+                            </Button>
+                            <Button variant="danger" size='lg' >Delete</Button>
+                        </div>
                     </Col>
                     <Col md={{ span: 4, offset: 1 }}  >
                         <Card className={classes['card-item']} >

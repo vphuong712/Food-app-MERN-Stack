@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { showing, hide } from '../../features/modals/addProductFormSlice.js';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -13,6 +14,7 @@ const FormComponent = () => {
 
     const show = useSelector((state) => state.addProduct.show)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [ inputValue, setInputValue ] = useState({
         imageUrl: '',
@@ -71,6 +73,7 @@ const FormComponent = () => {
                 setIsLoading(false);
                 setValidated(false);
                 alert(response.data.message);
+                navigate('/');
             } catch(error) {
                 setIsLoading(false);
                 setValidated(false);
@@ -91,7 +94,7 @@ const FormComponent = () => {
             required
             onChange={imgUrlChangeHandler}
             />
-            <Form.Control.Feedback type="invalid">'You need type this input!'</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">You need type this input!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group className={`mb3 ${classes['form-group']}`}>
             <Form.Label>Title</Form.Label>

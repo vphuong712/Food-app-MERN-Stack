@@ -16,6 +16,10 @@
     padding: 8px;
 }
 
+.form button {
+    margin-right: 8px;
+}
+
 .loading {
     display: flex;
     justify-content: center;

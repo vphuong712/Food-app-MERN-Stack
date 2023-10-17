@@ -66,3 +66,13 @@ export const updateFood = async (req, res) => {
         res.status(500).json(error);
     }
 }
+
+export const deleteFood = async (req, res) => {
+    const id = req.body.id;
+    try {
+        await Menu.findByIdAndDelete(id)
+        res.status(200).json({ message: 'Success!'});
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong!' })
+    }
+}

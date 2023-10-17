@@ -4,16 +4,18 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import classes from './FoodItemDetail.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../../features/cart/cartSlice';
+import axios from 'axios';
 
 
 const FoodItemDetail = () => {
     const data = useLoaderData();
     const food = data.data;
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const addItemHandler = () => {
         dispatch(addItemToCart({
@@ -23,6 +25,22 @@ const FoodItemDetail = () => {
             price: food.price,
             quantity: 1
         }))
+    }
+
+    const deleteItemHandler = () => {
+        const notify = confirm('Are you sure you want to delete ?')
+        if (notify) {
+            const deleteFood = async () => {
+                try {
+                    const response = await axios.delete('http://localhost:8080/menu', { data: {id: food._id} })
+                    alert(response.data.message)
+                    navigate('/')
+                } catch (error) {
+                    alert(error.response.data.message)
+                }
+            }
+            deleteFood();
+        }
     }
 
     return (
@@ -35,7 +53,7 @@ const FoodItemDetail = () => {
                             <Button variant="danger" size='lg' >
                                 <Link to='edit' >Edit</Link>
                             </Button>
-                            <Button variant="danger" size='lg' >Delete</Button>
+                            <Button onClick={deleteItemHandler} variant="danger" size='lg' >Delete</Button>
                         </div>
                     </Col>
                     <Col md={{ span: 4, offset: 1 }}  >

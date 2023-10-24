@@ -1,7 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+
 import menuRoutes from './routes/menu.js';
+import authRoutes from './routes/auth.js';
 
 const app = express();
 const URI = 'mongodb+srv://vphuong712:gtlp560j@cluster0.7nl7hqc.mongodb.net/foodMenu?retryWrites=true&w=majority'
@@ -13,6 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use(menuRoutes);
+
+app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => {
     res.send('SERVER IS RUNNING!');

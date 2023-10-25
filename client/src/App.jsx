@@ -6,6 +6,7 @@ import DiscountPage from './pages/DiscountPage.jsx';
 import BookPartyPage from './pages/BookParty.jsx';
 import FoodItemDetailPage, { loader as FoodItemDetailLoader } from './pages/FoodItemDetailPage';
 import EditProductPage, { loader as EditProductLoader } from './pages/EditProductPage.jsx';
+import AuthPage from './pages/AuthPage.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 
 const router = createBrowserRouter([
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         path: 'book-a-party',
         element: <BookPartyPage />,
       },
+      {
+        path: 'account/register',
+        element: <AuthPage/>
+      }
     ],
   },
 ]);

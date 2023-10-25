@@ -4,9 +4,14 @@ import Form from 'react-bootstrap/Form';
 import * as formik from 'formik';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
 
 const RegisterForm = () => {
     const { Formik } = formik;
+
+    const [errMessage, setErrMessage] = useState('');
+    const [conflictEmailMsg, setConflictEmailMsg] = useState('');
 
     const schema = yup.object().shape({
       firstName: yup.string().max(50, 'Your First Name must be under 50 characters').required('Please enter your first name.'),
@@ -25,7 +30,30 @@ const RegisterForm = () => {
         <>
             <Formik
                 validationSchema={schema}
-                onSubmit={console.log}
+                onSubmit={(values) => {
+                    const registerUser = async () => {
+                        try {
+                            const response = await axios.put('http://localhost:8080/auth/signup', {
+                                firstName: values.firstName,
+                                lastName: values.lastName,
+                                address: values.address,
+                                phoneNumber: values.phoneNumber,
+                                email: values.email,
+                                password: values.password
+                            })
+                            if(response.status === 201) {
+                                alert(response.data.message);
+                            }
+                        } catch (error) {
+                            if(error.response.status === 409) {
+                                setConflictEmailMsg(error.response.data.message)
+                            } else {
+                                setErrMessage(error.response.data.message)
+                            }
+                        }
+                    }
+                    registerUser();
+                }}
                 initialValues={{
                 firstName: '',
                 lastName: '',
@@ -39,6 +67,8 @@ const RegisterForm = () => {
                 {({ handleSubmit, handleChange, values, touched, errors }) => (
                 <Form noValidate onSubmit={handleSubmit}>
                     <h1>Create Your Account</h1>
+                    <p className={classes['err-message']}>{errMessage}</p>
+                    <p className={classes['err-message']} type="invalid">{conflictEmailMsg}</p>
                     <Form.Group className={classes['form-group']} controlId="validationFormik01">
                         <Form.Label>First Name</Form.Label>
                         <Form.Control

@@ -8,9 +8,9 @@ export const signup = async (req, res, next) => {
         const error = new Error('Validation failed.');
         error.status = 422;
         error.data = errors.array();
-        res.status(error.status).json( { error: error.message, data: error.data } );
+        res.status(error.status).json( { message: error.message, data: error.data } );
+        return;
     }
-
     const email = req.body.email;
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
@@ -18,6 +18,11 @@ export const signup = async (req, res, next) => {
     const address = req.body.address;
     const password = req.body.password;
     try {
+        const existedUser = await User.findOne({ email: email}).exec();
+        if(existedUser) {
+            res.status(409).json( { message: 'Email already exists!' })
+            return;
+        }
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(password, salt);
         const user = new User({
@@ -29,10 +34,10 @@ export const signup = async (req, res, next) => {
             password: hashPassword,
         })
         await user.save();
-        res.status(201).json({ message: 'User created!', userId: user._id })
+        res.status(201).json({ message: 'Success!', userId: user._id })
         
     } catch (error) {
-        
+        res.status(500).json(error)
     }
     
 }

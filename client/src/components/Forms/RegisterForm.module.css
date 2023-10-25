@@ -16,7 +16,8 @@ form .form-group label {
     font-size: 1.6rem;
 }
 
-form .form-group .err-message {
+form .err-message {
+    color: #dc3545;
     font-size: 1.3rem;
 }
 

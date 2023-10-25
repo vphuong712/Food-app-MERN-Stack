@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <BookPartyPage />,
       },
       {
-        path: 'account/register',
+        path: 'account',
         element: <AuthPage/>
       }
     ],

@@ -24,18 +24,9 @@ form .form-group input {
     padding: 8px;
 }
 
-form .form-group .form-check {
-    font-size: 1.4rem;
-}
-
-form .form-group .form-check .invalid-feedback {
-    font-size: 1.3rem;
-}
-
 form .submit {
     margin-top: 8px;
     width: 100%;
-    border: 1px solid #e4002b;
     border-radius: 25px;
     line-height: 20px;
     font-size: 1.5rem;

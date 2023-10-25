@@ -12,6 +12,11 @@
     justify-content: space-around;
 }
 
+.user a svg{
+    font-size: 3rem;
+    color: #202124;
+}
+
 .user button,
 .cart button{
     justify-content: center;

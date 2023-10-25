@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Badge from 'react-bootstrap/Badge';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CarIcon from './UI/CartIcon';
+import { FaCircleUser } from "react-icons/fa6";
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { showing } from '../features/modals/addProductFormSlice';
@@ -32,9 +33,12 @@ const Header = () => {
             </ul>   
             <ul>
                 <li className={classes.user} >
-                    <NavDropdown title="Admin" id="basic-nav-dropdown">
+                    <Link to="account?mode=login" >
+                        <FaCircleUser />
+                    </Link>
+                    {/* <NavDropdown title="Admin" id="basic-nav-dropdown">
                         <NavDropdown.Item onClick={() => dispatch(showing())} >Add New Food</NavDropdown.Item>    
-                    </NavDropdown>
+                    </NavDropdown> */}
                 </li>
                 <li className={classes.cart}>
                     <Button onClick={() => dispatch(showCart())} variant="outline-danger">

@@ -4,14 +4,30 @@ import Badge from 'react-bootstrap/Badge';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CarIcon from './UI/CartIcon';
 import { FaCircleUser } from "react-icons/fa6";
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLoaderData, useSubmit } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { showing } from '../features/modals/addProductFormSlice';
 import { showing as showCart } from '../features/cart/cartSlice';
 
 
 
+
+
 const Header = () => {
+    const token = useLoaderData();
+    const submit = useSubmit();
+
+
+    const userNav = (
+    <NavDropdown title="Admin" id="basic-nav-dropdown">
+        <NavDropdown.Item onClick={() => dispatch(showing())} >Add New Food</NavDropdown.Item>
+        <NavDropdown.Item >Order Status</NavDropdown.Item>
+        <NavDropdown.Item >Profile</NavDropdown.Item>    
+        <NavDropdown.Item onClick={() => {
+            submit(null, { method: 'post', action: '/logout' })
+        }} >Logout</NavDropdown.Item>    
+    </NavDropdown>
+    );
 
     const products = useSelector((state) => state.cart.products);
     let totalQuantity = 0;
@@ -33,12 +49,7 @@ const Header = () => {
             </ul>   
             <ul>
                 <li className={classes.user} >
-                    <Link to="account?mode=login" >
-                        <FaCircleUser />
-                    </Link>
-                    {/* <NavDropdown title="Admin" id="basic-nav-dropdown">
-                        <NavDropdown.Item onClick={() => dispatch(showing())} >Add New Food</NavDropdown.Item>    
-                    </NavDropdown> */}
+                    {token ? userNav : <Link to="account?mode=login" ><FaCircleUser /></Link>}
                 </li>
                 <li className={classes.cart}>
                     <Button onClick={() => dispatch(showCart())} variant="outline-danger">

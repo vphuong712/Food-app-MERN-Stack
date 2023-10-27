@@ -3,10 +3,14 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import * as formik from 'formik';
 import * as yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { getAuthToken } from '../../util/auth';
 
 const LoginForm = () => {
     const { Formik } = formik;
+
+    const navigate = useNavigate();
 
     const schema = yup.object().shape({
       email: yup.string().max(50, 'Your Email must be under 50 characters').email('Please enter a valid email address.').required('Please enter your email address.'),
@@ -17,7 +21,28 @@ const LoginForm = () => {
         <>
             <Formik
                 validationSchema={schema}
-                onSubmit={console.log}
+                onSubmit={(values) => {
+                    const login = async () => {
+                        try {
+                            const response = await axios.post('http://localhost:8080/auth/login',
+                            {
+                                email: values.email,
+                                password: values.password
+                            }
+                            )
+                            if(response.status === 200) {
+                                const resData = response.data;
+                                console.log(resData);
+                                localStorage.setItem('token', resData.token);
+                                localStorage.setItem('userId', resData.user.userId);
+                                navigate('/');
+                            }
+                        } catch (error) {
+                            
+                        }
+                    }
+                    login();
+                }}
                 initialValues={{
                 email: '',
                 password: '',

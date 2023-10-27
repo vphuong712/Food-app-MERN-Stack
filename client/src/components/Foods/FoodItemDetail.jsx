@@ -4,18 +4,21 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import classes from './FoodItemDetail.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useRouteLoaderData } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../../features/cart/cartSlice';
 import axios from 'axios';
+import { getAuthToken } from '../../util/auth';
 
 
 const FoodItemDetail = () => {
     const data = useLoaderData();
-    const food = data.data;
-    const dispatch = useDispatch();
+    const token = useRouteLoaderData('root');
     const navigate = useNavigate();
+    
+    const dispatch = useDispatch();
+    const food = data.data;
 
     const addItemHandler = () => {
         dispatch(addItemToCart({
@@ -32,7 +35,10 @@ const FoodItemDetail = () => {
         if (notify) {
             const deleteFood = async () => {
                 try {
-                    const response = await axios.delete('http://localhost:8080/menu', { data: {id: food._id} })
+                    const token = getAuthToken()
+                    const response = await axios.delete('http://localhost:8080/menu', { data: {id: food._id} }, {
+                        headers: { 'Authorization': 'Bearer ' + token }
+                    })
                     alert(response.data.message)
                     navigate('/')
                 } catch (error) {
@@ -65,7 +71,7 @@ const FoodItemDetail = () => {
                                 <Card.Text>
                                     {food.description}
                                 </Card.Text>
-                                <Button onClick={addItemHandler} size='lg' variant='danger' className={classes.btn} >Add</Button>
+                                <Button onClick={token ? addItemHandler : navigate.bind(null, '/account?mode=login')} size='lg' variant='danger' className={classes.btn} >Add</Button>
                             </Card.Body>
                         </Card>
                     </Col>

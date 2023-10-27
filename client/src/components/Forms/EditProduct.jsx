@@ -8,7 +8,8 @@ import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
 import axios from 'axios';
-import Loading from '../UI/Loading.jsx'
+import Loading from '../UI/Loading.jsx';
+import { getAuthToken } from '../../util/auth';
 
 
 const EditProduct = () => {
@@ -66,7 +67,10 @@ const EditProduct = () => {
         
         const updateProduct = async () => {
             try {
-                const response = await axios.put(`http://localhost:8080/menu/${food._id}`, inputValue)
+                const token = getAuthToken();
+                const response = await axios.put(`http://localhost:8080/menu/${food._id}`, inputValue, {
+                    headers: {'Authorization': 'Bearer ' + token}
+                })
                 setIsLoading(false);
                 console.log(response);
                 alert(response.data.message)

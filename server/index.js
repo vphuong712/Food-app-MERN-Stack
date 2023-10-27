@@ -14,9 +14,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
+app.use('/auth', authRoutes);
+
 app.use(menuRoutes);
 
-app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => {
     res.send('SERVER IS RUNNING!');

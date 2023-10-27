@@ -1,6 +1,7 @@
 import User from '../models/user.js';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 export const signup = async (req, res, next) => {
     const errors = validationResult(req);
@@ -41,3 +42,39 @@ export const signup = async (req, res, next) => {
     }
     
 }
+
+export const login = async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    try {
+        const user = await User.findOne({ email: email });
+        if(!user) {
+            const error = new Error('A user with email could not be found.');
+            res.status(401).json(error);
+            return;
+        }
+        const matches = await bcrypt.compare(password, user.password);
+        if(!matches) {
+            const error = new Error('Wrong password!');
+            res.status(401).json(error);
+            return;
+        }
+        const token = jwt.sign(
+            {
+                email: user.email,
+                userId: user._id.toString()
+            },
+            'gtlp560j',
+            { expiresIn: '1h' }
+            )
+        res.status(200).json({ token: token, user: {
+            userId: user._id.toString(),
+            firstName: user.firstName,
+            lastName: user.lastName,
+            address: user.address,
+            phoneNumber: user.phoneNumber,
+        } });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};

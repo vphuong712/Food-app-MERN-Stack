@@ -4,9 +4,12 @@ import { formatPrice } from '../../util/format'
 import classes from './FoodItem.module.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, useRouteLoaderData, useNavigate } from 'react-router-dom';
 
 const FoodItem = (props) => {
+
+    const token = useRouteLoaderData('root');
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     const addEventHandler = () => {
@@ -35,7 +38,7 @@ const FoodItem = (props) => {
                     </Card.Text>
                 </Link>
                 <div className='d-grid' >
-                    <Button onClick={addEventHandler} size='lg' variant='danger' className={classes.btn} >Add</Button>
+                    <Button onClick={token ? addEventHandler : navigate.bind(null, '/account?mode=login')} size='lg' variant='danger' className={classes.btn} >Add</Button>
                 </div>
             </Card.Body>
         </Card>

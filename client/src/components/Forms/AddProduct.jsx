@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Loading from '../UI/Loading.jsx';
 import axios from 'axios'
 import classes from './AddProduct.module.css';
+import { getAuthToken } from '../../util/auth.js';
 
 
 const FormComponent = () => {
@@ -69,7 +70,10 @@ const FormComponent = () => {
         setIsLoading(true);
         const postData = async () => {
             try {
-                const response = await axios.post('http://localhost:8080/menu', inputValue);
+                const token = getAuthToken();
+                const response = await axios.post('http://localhost:8080/menu', inputValue, {
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
                 setIsLoading(false);
                 setValidated(false);
                 alert(response.data.message);

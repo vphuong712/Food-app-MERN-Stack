@@ -1,6 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
-import { signup } from '../controllers/authController.js';
+import { signup, login } from '../controllers/authController.js';
 
 
 const router = express.Router();
@@ -13,5 +13,7 @@ router.put('/signup', [
     body('address').trim().isLength({ max: 50 }).not().isEmpty().withMessage('Please enter address.'),
     body('phoneNumber').isLength({ max: 11 }).isMobilePhone().withMessage('Please enter a valid phone number.')
 ], signup);
+
+router.post('/login', login);
 
 export default router;

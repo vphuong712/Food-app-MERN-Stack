@@ -3,13 +3,17 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import * as formik from 'formik';
 import * as yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
+import Loading from '../UI/Loading';
 
 const RegisterForm = () => {
     const { Formik } = formik;
 
+    const navigate = useNavigate();
+
+    const [isLoading, setIsLoading] = useState(false);
     const [errMessage, setErrMessage] = useState('');
     const [conflictEmailMsg, setConflictEmailMsg] = useState('');
 
@@ -28,10 +32,15 @@ const RegisterForm = () => {
   
     return (
         <>
+            {isLoading ? <div className={classes.loading} >
+                <Loading/>
+            </div> : 
+            <>
             <Formik
                 validationSchema={schema}
                 onSubmit={(values) => {
                     const registerUser = async () => {
+                        setIsLoading(true);
                         try {
                             const response = await axios.put('http://localhost:8080/auth/signup', {
                                 firstName: values.firstName,
@@ -42,7 +51,9 @@ const RegisterForm = () => {
                                 password: values.password
                             })
                             if(response.status === 201) {
+                                setIsLoading(false);
                                 alert(response.data.message);
+                                navigate('/account?mode=login');
                             }
                         } catch (error) {
                             if(error.response.status === 409) {
@@ -173,6 +184,8 @@ const RegisterForm = () => {
                 )}
             </Formik>
             <p className={classes.note} >Already have an account? <Link to="?mode=login">Sign In</Link></p>
+            </>
+            }
         </>
     );
 }

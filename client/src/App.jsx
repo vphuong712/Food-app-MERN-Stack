@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root, { loader as tokenLoader} from './pages/Root.jsx';
+import Root, { loader as rootLoader} from './pages/Root.jsx';
 import FoodMenuPage, { loader as FoodMenuLoader } from './pages/FoodMenuPage.jsx';
 import DiscountPage from './pages/DiscountPage.jsx';
 import BookPartyPage from './pages/BookParty.jsx';
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <Root />,
     errorElement: <ErrorPage />,
-    loader: tokenLoader,
+    loader: rootLoader,
     id: 'root',
     children: [
       {
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'account',
-        element: <AuthPage/>
+        element: <AuthPage/>,
       },
       {
         path: 'logout',

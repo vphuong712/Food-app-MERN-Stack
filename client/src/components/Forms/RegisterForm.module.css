@@ -1,3 +1,9 @@
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 form h1 {
     margin: 14px 0;
     text-align: center;
@@ -17,6 +23,7 @@ form .form-group label {
 }
 
 form .err-message {
+    margin-left: 8px;
     color: #dc3545;
     font-size: 1.3rem;
 }

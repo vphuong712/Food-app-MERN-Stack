@@ -8,18 +8,36 @@ import { NavLink, Link, useLoaderData, useSubmit } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { showing } from '../features/modals/addProductFormSlice';
 import { showing as showCart } from '../features/cart/cartSlice';
+import { getAuthToken } from '../util/auth';
 
 
 
 
 
 const Header = () => {
-    const token = useLoaderData();
+    const token = getAuthToken();
+    const user = useLoaderData() || {
+        userId: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        address: ''
+    };
+    console.log(user);
     const submit = useSubmit();
 
 
+    const products = useSelector((state) => state.cart.products);
+    let totalQuantity = 0;
+    if(products.length > 0) {
+        totalQuantity = products.reduce((acc, product) => acc + product.quantity, 0);
+    }
+    const dispatch = useDispatch();
+
+
     const userNav = (
-    <NavDropdown title="Admin" id="basic-nav-dropdown">
+    <NavDropdown title={`${user.firstName} ${user.lastName}`} id="basic-nav-dropdown">
         <NavDropdown.Item onClick={() => dispatch(showing())} >Add New Food</NavDropdown.Item>
         <NavDropdown.Item >Order Status</NavDropdown.Item>
         <NavDropdown.Item >Profile</NavDropdown.Item>    
@@ -29,12 +47,7 @@ const Header = () => {
     </NavDropdown>
     );
 
-    const products = useSelector((state) => state.cart.products);
-    let totalQuantity = 0;
-    if(products.length > 0) {
-        totalQuantity = products.reduce((acc, product) => acc + product.quantity, 0);
-    }
-    const dispatch = useDispatch();
+
 
 
 

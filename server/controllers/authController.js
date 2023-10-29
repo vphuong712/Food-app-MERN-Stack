@@ -46,17 +46,16 @@ export const signup = async (req, res, next) => {
 export const login = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
+    const errorMessage = 'The email address or password you entered is incorrect. Please try again.'
     try {
         const user = await User.findOne({ email: email });
         if(!user) {
-            const error = new Error('A user with email could not be found.');
-            res.status(401).json(error);
+            res.status(401).json({ message: errorMessage });
             return;
         }
         const matches = await bcrypt.compare(password, user.password);
         if(!matches) {
-            const error = new Error('Wrong password!');
-            res.status(401).json(error);
+            res.status(401).json({ message: errorMessage });
             return;
         }
         const token = jwt.sign(
@@ -67,13 +66,7 @@ export const login = async (req, res) => {
             'gtlp560j',
             { expiresIn: '1h' }
             )
-        res.status(200).json({ token: token, user: {
-            userId: user._id.toString(),
-            firstName: user.firstName,
-            lastName: user.lastName,
-            address: user.address,
-            phoneNumber: user.phoneNumber,
-        } });
+        res.status(200).json({ token: token, userId: user._id.toString() });
     } catch (error) {
         res.status(500).json(error);
     }

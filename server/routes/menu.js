@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/menu', getMenu);
 
-router.delete('/menu', isAuth, deleteFood);
+router.delete(isAuth, deleteFood);
 
 router.get('/menu/:foodId', getFoodById);
 

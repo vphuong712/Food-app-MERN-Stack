@@ -16,17 +16,19 @@ const CartItem = (props) => {
         title: props.title,
         price: props.price / props.quantity,
         quantity: 1
-      }));
+      }))
     }
 
     const reduceItemHandler = () => {
-      dispatch(reduceItemFromCart({
-        id: props.id,
-        image: props.image,
-        title: props.title,
-        price: props.price / props.quantity,
-        quantity: 1
-      }))
+      dispatch(reduceItemFromCart(
+        {
+            id: props.id,
+            image: props.image,
+            title: props.title,
+            price: props.price / props.quantity,
+            quantity: 1
+        }
+      ))
     }
 
     return (
@@ -38,7 +40,7 @@ const CartItem = (props) => {
           <Badge bg='light' className={classes.quantity}>{props.quantity}</Badge>
           <Button onClick={addEventHandler} variant='danger' >+</Button>
         </div>
-        <p>{`${formatPrice(props.price)}đ`}</p>
+        <p>{`${formatPrice(props.price * props.quantity)}đ`}</p>
       </div>
     );
 }

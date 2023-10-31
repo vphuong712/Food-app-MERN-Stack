@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { addItemToCart } from '../../features/cart/cartSlice';
+import { addItemToCart} from '../../features/cart/cartSlice';
 import { formatPrice } from '../../util/format'
 import classes from './FoodItem.module.css';
 import Card from 'react-bootstrap/Card';
@@ -13,6 +13,7 @@ const FoodItem = (props) => {
 
     const dispatch = useDispatch();
     const addEventHandler = () => {
+
         dispatch(addItemToCart({
             id: props.id,
             image: props.image,

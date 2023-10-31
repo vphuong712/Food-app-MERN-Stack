@@ -10,10 +10,6 @@ import { showing } from '../features/modals/addProductFormSlice';
 import { showing as showCart } from '../features/cart/cartSlice';
 import { getAuthToken } from '../util/auth';
 
-
-
-
-
 const Header = () => {
     const token = getAuthToken();
     const user = useLoaderData() || {
@@ -24,7 +20,7 @@ const Header = () => {
         phoneNumber: '',
         address: ''
     };
-    console.log(user);
+    
     const submit = useSubmit();
 
 
@@ -40,15 +36,12 @@ const Header = () => {
     <NavDropdown title={`${user.firstName} ${user.lastName}`} id="basic-nav-dropdown">
         <NavDropdown.Item onClick={() => dispatch(showing())} >Add New Food</NavDropdown.Item>
         <NavDropdown.Item >Order Status</NavDropdown.Item>
-        <NavDropdown.Item >Profile</NavDropdown.Item>    
+        <Link to='account/profile' >Profile</Link>    
         <NavDropdown.Item onClick={() => {
             submit(null, { method: 'post', action: '/logout' })
         }} >Logout</NavDropdown.Item>    
     </NavDropdown>
     );
-
-
-
 
 
     return <header className={classes.header}>

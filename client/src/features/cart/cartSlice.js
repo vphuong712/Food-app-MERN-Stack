@@ -1,7 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+import { getAuthToken } from '../../util/auth'
+
 
 const initialState = {
     show: false,
+    status: 'idle',
     products: []
 }
 
@@ -15,39 +19,103 @@ const cartSlice = createSlice({
         hide: (state) => {
             state.show = false
         },
-        addItemToCart: (state, action) => {
+    },
+    extraReducers: builder => {
+        builder
+        .addCase(getItemsFromCart.fulfilled, (state, action) => {
+            state.products = action.payload;
+            state.status = 'idle';
+        })
+        .addCase(addItemToCart.fulfilled, (state, action) => {
             const productIndex = state.products.findIndex((product) => product.id === action.payload.id);
             if(state.products[productIndex]) {
-                const oldQuantity = state.products[productIndex].quantity;
-                const oldPrice = state.products[productIndex].price;
-                const newQuantity = oldQuantity + action.payload.quantity;
-                const newPrice = oldPrice + action.payload.price;
-                if(newQuantity > 5) {
-                    return;
-                }
-                state.products[productIndex].quantity = newQuantity; 
-                state.products[productIndex].price = newPrice ;
+                const newQuantity =  action.payload.quantity;
+                state.products[productIndex].quantity = newQuantity;
+                state.status = 'idle';
             } else {
                 state.products.push(action.payload);
+                state.status = 'idle';
             }
-        },
-        reduceItemFromCart: (state, action) => {
+        })
+        .addCase(reduceItemFromCart.fulfilled, (state, action) => {
             const productIndex = state.products.findIndex((product) => product.id === action.payload.id);
             if(state.products[productIndex]) {
-                const oldQuantity = state.products[productIndex].quantity;
-                const newQuantity = oldQuantity - action.payload.quantity;
+                const newQuantity =  action.payload.quantity;
                 if(newQuantity <= 0) {
                     state.products.splice(productIndex, 1);
+                    state.status = 'idle';
                     return;
                 }
-                const oldPrice = state.products[productIndex].price;
-                const newPrice = oldPrice - action.payload.price;
-                state.products[productIndex].quantity = newQuantity; 
-                state.products[productIndex].price = newPrice ;
-            } 
-        }
+                state.products[productIndex].quantity = newQuantity;
+                state.status = 'idle';
+            }
+        })
     }
 })
 
-export const { showing, hide, addItemToCart, reduceItemFromCart } = cartSlice.actions;
+export const { showing, hide } = cartSlice.actions;
+
+export const getItemsFromCart = createAsyncThunk('items/getItemsFromCart', async () => {
+    const token = getAuthToken();
+    const userId = localStorage.getItem('userId');
+    if(token && userId) {
+        const response = await axios.get(`http://localhost:8080/user/${userId}/cart`, {
+            headers: {'Authorization': 'Bearer ' + token}
+        }) 
+        const foods = response.data.map(food => {
+            return {
+                id: food.foodId._id,
+                image: food.foodId.imageUrl,
+                title: food.foodId.title,
+                price: food.foodId.price,
+                quantity: food.quantity
+            }
+        });
+        return foods;
+    }
+    return [];
+})
+
+export const addItemToCart = createAsyncThunk('items/addItemsToCart', async (item) => {
+    const token = getAuthToken();
+    const userId = localStorage.getItem('userId');
+    if(token && userId) {
+        const response = await axios.post(`http://localhost:8080/user/${userId}/cart`, item, {
+            headers: {'Authorization': 'Bearer ' + token}
+        })
+
+        const data = response.data;
+
+        const food = {
+            id: data.foodId._id,
+            image: data.foodId.imageUrl,
+            title: data.foodId.title,
+            price: data.foodId.price,
+            quantity: data.quantity
+        }
+        return food;
+    }
+})
+
+export const reduceItemFromCart = createAsyncThunk('items/reduceItemsFromCart', async (item) => {
+    const token = getAuthToken();
+    const userId = localStorage.getItem('userId');
+    if(token && userId) {
+        const response = await axios.patch(`http://localhost:8080/user/${userId}/cart`, item, {
+            headers: {'Authorization': 'Bearer ' + token}
+        })
+
+        const data = response.data;
+
+        const food = {
+            id: data.foodId._id,
+            image: data.foodId.imageUrl,
+            title: data.foodId.title,
+            price: data.foodId.price,
+            quantity: data.quantity
+        }
+        return food;
+    }
+})
+
 export default cartSlice.reducer;

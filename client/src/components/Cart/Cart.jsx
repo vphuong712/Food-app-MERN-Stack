@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { showing, hide } from '../../features/cart/cartSlice';
+import { useEffect } from 'react';
+import { showing, hide, getItemsFromCart } from '../../features/cart/cartSlice';
 import CartItem from './CartItem';
 import CarIcon from '../UI/CartIcon';
 import { formatPrice } from '../../util/format';
@@ -9,11 +10,17 @@ import classes from './Cart.module.css';
 
 const Cart = () => {
   const { show, products } = useSelector((state) => state.cart);
+  console.log(products);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getItemsFromCart());
+  }, [])
+
+ 
   let total = 0;
   if(products.length > 0) {
-    total = products.reduce((acc, product) => acc + product.price, 0);
+    total = products.reduce((acc, product) => acc + product.price * product.quantity, 0);
   }
   
 

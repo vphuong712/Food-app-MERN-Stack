@@ -27,7 +27,8 @@ const FoodItemDetail = () => {
             image: food.imageUrl,
             price: food.price,
             quantity: 1
-        }))
+        }));
+
     }
 
     const deleteItemHandler = () => {

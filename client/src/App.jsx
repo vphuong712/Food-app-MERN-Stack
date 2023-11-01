@@ -9,6 +9,7 @@ import EditProductPage, { loader as EditProductLoader } from './pages/EditProduc
 import AuthPage, { loader as AuthLoader } from './pages/AuthPage.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
+import ResetPasswordPage from './pages/ResetPasswordPage.jsx';
 import { action as LogoutAction } from './pages/LogoutPage';
 
 const router = createBrowserRouter([
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
           {
             path: 'profile',
             element: <ProfilePage/>,
+          },
+          {
+            path: 'reset-password',
+            element: <ResetPasswordPage/>,
           }
         ]
       },

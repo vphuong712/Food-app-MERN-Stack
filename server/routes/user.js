@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUser, updateUser, getCart, postCart, reduceItemFromCart } from '../controllers/userController.js';
+import { getUser, updateUser, getCart, postCart, reduceItemFromCart, resetPassword } from '../controllers/userController.js';
 import { body } from 'express-validator';
 import isAuth from '../middlewares/is-auth.js';
 
@@ -13,6 +13,17 @@ router.put('/user/:userId', [
     body('address').trim().isLength({ max: 50 }).not().isEmpty().withMessage('Please enter address.'),
     body('phoneNumber').isLength({ max: 11 }).isMobilePhone().withMessage('Please enter a valid phone number.')
 ], isAuth, updateUser);
+
+router.put('/user/:userId/reset-password',[
+    body('currentPassword').trim().isLength({ min: 8 }).not().isEmpty().withMessage('Please enter current password'),
+    body('newPassword').trim().isLength({ min: 8 }).not().isEmpty().withMessage('Please enter new password'),
+    body('confirmPassword').trim().isLength({ min: 8 }).custom((value, { req }) => {
+        if (value !== req.body.newPassword) {
+          throw new Error('Password confirmation does not match password');
+        }
+        return true;
+    }).not().isEmpty().withMessage('Please enter confirm password')
+], isAuth, resetPassword);
 
 router.get('/user/:userId/cart', isAuth, getCart);
 

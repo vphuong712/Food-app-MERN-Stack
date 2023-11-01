@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
-import { getAuthToken } from '../../util/auth'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { getAuthToken } from '../../util/auth';
 
 
 const initialState = {
@@ -58,10 +58,11 @@ export const { showing, hide } = cartSlice.actions;
 export const getItemsFromCart = createAsyncThunk('items/getItemsFromCart', async () => {
     const token = getAuthToken();
     const userId = localStorage.getItem('userId');
-    if(token && userId) {
+
+    if(token !== 'EXPIRED' && userId) {
         const response = await axios.get(`http://localhost:8080/user/${userId}/cart`, {
             headers: {'Authorization': 'Bearer ' + token}
-        }) 
+        })
         const foods = response.data.map(food => {
             return {
                 id: food.foodId._id,

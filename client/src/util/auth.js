@@ -1,5 +1,3 @@
-import { redirect } from "react-router-dom";
-
 export const getTokenDuration = () => {
     const storedExpiration = localStorage.getItem('expiration');
     const expirationDate = new Date(storedExpiration);

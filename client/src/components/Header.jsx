@@ -40,6 +40,7 @@ const Header = () => {
         {isAdmin && <NavDropdown.Item onClick={() => dispatch(showing())} >Add New Food</NavDropdown.Item>}
         <NavDropdown.Item >Order Status</NavDropdown.Item>
         <Link to='account/profile' >Profile</Link>    
+        <Link to='account/reset-password' >Change Password</Link>
         <NavDropdown.Item onClick={() => {
             submit(null, { method: 'post', action: '/logout' })
         }} >Logout</NavDropdown.Item>    

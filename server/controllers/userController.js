@@ -1,5 +1,7 @@
 import User from '../models/user.js';
-import { query, validationResult } from 'express-validator';
+import { validationResult } from 'express-validator';
+import bcrypt from 'bcryptjs';
+
 
 
 export const getUser = async (req, res) => {
@@ -60,6 +62,38 @@ export const updateUser = async (req, res) => {
     }   
 };
 
+export const resetPassword = async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        const error = new Error('Reset failed.');
+        error.status = 422;
+        error.data = errors.array();
+        res.status(error.status).json( { message: error.message, data: error.data } );
+        return;
+    }
+    const id = req.userId;
+    const currentPassword = req.body.currentPassword;
+    const newPassword = req.body.newPassword;
+
+    try {
+        const user = await User.findById(id);
+        const matches = await bcrypt.compare(currentPassword, user.password);
+        if(!matches) {
+            res.status(401).json({ message: 'Wrong password.' });
+            return;
+        };
+
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(newPassword, salt);
+        user.password = hashPassword;
+        await user.save();
+
+        res.status(200).json({ message: 'Success!' });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
 export const getCart = async (req, res) => {
     const id = req.userId;
     try {
@@ -92,7 +126,6 @@ export const postCart = async (req, res) => {
             res.status(200).json(query.cart.items[indexItem]);
         }
     } catch (error) {
-        console.log(error);
         res.status(500).json(error);
     }
 };

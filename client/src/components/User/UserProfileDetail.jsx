@@ -64,7 +64,7 @@ const UserProfileDetail = () => {
                                 setUserData(response.data.user);
                                 setTimeout(() => {
                                     location.reload();
-                                }, 100);
+                                }, 1000);
                             }
                         } catch (error) {
                             setIsLoading(false);

@@ -44,13 +44,17 @@ const LoginForm = () => {
                                 if(response.status === 200) {
                                     setIsLoading(false);
                                     const resData = response.data;
-                                    console.log(resData);
+                                    
                                     localStorage.setItem('token', resData.token);
                                     localStorage.setItem('userId', resData.userId);
+                                    const expiration = new Date();
+                                    expiration.setHours(expiration.getHours() + 1);
+                                    localStorage.setItem('expiration', expiration.toISOString());
+
                                     navigate('/')
                                     setTimeout(() => {
                                         location.reload();
-                                    }, 100)
+                                    }, 1000)
                                 }
                             } catch (error) {
                                 setIsLoading(false);

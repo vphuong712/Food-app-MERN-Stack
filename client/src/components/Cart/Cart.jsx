@@ -10,7 +10,6 @@ import classes from './Cart.module.css';
 
 const Cart = () => {
   const { show, products } = useSelector((state) => state.cart);
-  console.log(products);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -3,12 +3,13 @@ import Button from 'react-bootstrap/Button'
 import Badge from 'react-bootstrap/Badge';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CarIcon from './UI/CartIcon';
+import { useState } from 'react';
 import { FaCircleUser } from "react-icons/fa6";
 import { NavLink, Link, useLoaderData, useSubmit } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { showing } from '../features/modals/addProductFormSlice';
 import { showing as showCart } from '../features/cart/cartSlice';
-import { getAuthToken } from '../util/auth';
+import { getAuthToken, checkAdmin } from '../util/auth';
 
 const Header = () => {
     const token = getAuthToken();
@@ -20,6 +21,8 @@ const Header = () => {
         phoneNumber: '',
         address: ''
     };
+
+    const [isAdmin] = useState(checkAdmin(user));
     
     const submit = useSubmit();
 
@@ -34,7 +37,7 @@ const Header = () => {
 
     const userNav = (
     <NavDropdown title={`${user.firstName} ${user.lastName}`} id="basic-nav-dropdown">
-        <NavDropdown.Item onClick={() => dispatch(showing())} >Add New Food</NavDropdown.Item>
+        {isAdmin && <NavDropdown.Item onClick={() => dispatch(showing())} >Add New Food</NavDropdown.Item>}
         <NavDropdown.Item >Order Status</NavDropdown.Item>
         <Link to='account/profile' >Profile</Link>    
         <NavDropdown.Item onClick={() => {

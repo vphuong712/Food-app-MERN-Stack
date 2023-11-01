@@ -4,17 +4,20 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import classes from './FoodItemDetail.module.css';
+import { useState } from 'react';
 import { Link, useNavigate, useRouteLoaderData } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../../features/cart/cartSlice';
 import axios from 'axios';
-import { getAuthToken } from '../../util/auth';
+import { getAuthToken, checkAdmin } from '../../util/auth';
 
 
 const FoodItemDetail = () => {
     const data = useLoaderData();
-    const token = useRouteLoaderData('root');
+    const user = useRouteLoaderData('root');
+    const [isAdmin] = useState(checkAdmin(user));
+
     const navigate = useNavigate();
     
     const dispatch = useDispatch();
@@ -37,9 +40,10 @@ const FoodItemDetail = () => {
             const deleteFood = async () => {
                 try {
                     const token = getAuthToken()
-                    const response = await axios.delete('http://localhost:8080/menu', { data: {id: food._id} }, {
-                        headers: { 'Authorization': 'Bearer ' + token }
-                    })
+                    const response = await axios.delete(`http://localhost:8080/menu/${food._id}`,{
+                        headers: {'Authorization': 'Bearer ' + token},
+                        data: {id: food._id}
+                    });
                     alert(response.data.message)
                     navigate('/')
                 } catch (error) {
@@ -57,10 +61,10 @@ const FoodItemDetail = () => {
                     <Col md={{ span: 4, offset: 2 }} >
                         <img src={food.imageUrl} alt=""/>
                         <div className={classes['btn-wrap']} >
-                            <Button variant="danger" size='lg' >
+                            {isAdmin && <Button variant="danger" size='lg' >
                                 <Link to='edit' >Edit</Link>
-                            </Button>
-                            <Button onClick={deleteItemHandler} variant="danger" size='lg' >Delete</Button>
+                            </Button>}
+                            {isAdmin && <Button onClick={deleteItemHandler} variant="danger" size='lg' >Delete</Button>}
                         </div>
                     </Col>
                     <Col md={{ span: 4, offset: 1 }}  >
@@ -72,7 +76,7 @@ const FoodItemDetail = () => {
                                 <Card.Text>
                                     {food.description}
                                 </Card.Text>
-                                <Button onClick={token ? addItemHandler : navigate.bind(null, '/account?mode=login')} size='lg' variant='danger' className={classes.btn} >Add</Button>
+                                <Button onClick={user ? addItemHandler : navigate.bind(null, '/account?mode=login')} size='lg' variant='danger' className={classes.btn} >Add</Button>
                             </Card.Body>
                         </Card>
                     </Col>

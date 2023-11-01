@@ -1,5 +1,6 @@
 import AuthForm from "../components/Forms/AuthForm";
-import { Outlet } from "react-router-dom";
+import { Outlet, redirect } from "react-router-dom";
+import { getAuthToken } from "../util/auth";
 
 const AuthPage = () => {
     return (<>
@@ -9,4 +10,13 @@ const AuthPage = () => {
 }
 
 export default AuthPage;
+
+export const loader = () => {
+    const token = getAuthToken();
+    if(token) {
+        return redirect('/')
+    }
+    return null;
+}
+
 

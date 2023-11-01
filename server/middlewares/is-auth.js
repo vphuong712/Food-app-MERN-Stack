@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 const isAuth = async (req, res, next) => {
-    const authHeader = req.get('Authorization');
+    const authHeader = req.get('Authorization');  
     if(!authHeader) {
         const error = new Error('Not authenticated');
         error.statusCode = 401;
@@ -21,6 +21,7 @@ const isAuth = async (req, res, next) => {
         throw error;
     }
     req.userId = decodedToken.userId;
+    req.email = decodedToken.email;
     next();
 };
 

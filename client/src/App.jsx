@@ -6,7 +6,7 @@ import DiscountPage from './pages/DiscountPage.jsx';
 import BookPartyPage from './pages/BookParty.jsx';
 import FoodItemDetailPage, { loader as FoodItemDetailLoader } from './pages/FoodItemDetailPage';
 import EditProductPage, { loader as EditProductLoader } from './pages/EditProductPage.jsx';
-import AuthPage from './pages/AuthPage.jsx';
+import AuthPage, { loader as AuthLoader } from './pages/AuthPage.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import { action as LogoutAction } from './pages/LogoutPage';
@@ -48,6 +48,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <AuthPage/>,
+            loader: AuthLoader,
           },
           {
             path: 'profile',

@@ -48,6 +48,9 @@ const LoginForm = () => {
                                     localStorage.setItem('token', resData.token);
                                     localStorage.setItem('userId', resData.userId);
                                     navigate('/')
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 100)
                                 }
                             } catch (error) {
                                 setIsLoading(false);

@@ -61,7 +61,10 @@ const UserProfileDetail = () => {
                             if(response.status === 200) {
                                 const message = response.data.message;
                                 alert(message);
-                                setUserData(response.data.user)
+                                setUserData(response.data.user);
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 100);
                             }
                         } catch (error) {
                             setIsLoading(false);

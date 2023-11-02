@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import FoodItemDetail from "../components/Foods/FoodItemDetail";
 import axios from "axios";
 
 const FoodItemDetailPage = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return <FoodItemDetail />
 }
 

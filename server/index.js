@@ -1,13 +1,17 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 import menuRoutes from './routes/menu.js';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/user.js';
 
 const app = express();
-const URI = 'mongodb+srv://vphuong712:gtlp560j@cluster0.7nl7hqc.mongodb.net/foodMenu?retryWrites=true&w=majority'
+const PORT = process.env.PORT || 8000;
+const URI = process.env.DATABASE_URL;
 
 app.use(express.json());
 
@@ -29,6 +33,6 @@ app.get('/', (req, res) => {
 mongoose.connect(URI)
     .then(() => {
         console.log('CONNECTED!');
-        app.listen(8080);
+        app.listen(PORT);
     })
     .catch(err => console.log(err));

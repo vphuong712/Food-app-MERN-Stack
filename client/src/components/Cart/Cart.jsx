@@ -7,6 +7,7 @@ import { formatPrice } from '../../util/format';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import classes from './Cart.module.css';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const { show, products } = useSelector((state) => state.cart);
@@ -45,8 +46,8 @@ const Cart = () => {
         </Modal.Body>
         <Modal.Footer>
           <p className={classes['total-price']} >Total: {`${formatPrice(total)}đ`}</p>
-          <Button className={classes.btn} size='lg' variant="danger">
-            Order
+          <Button onClick={() => dispatch(hide())} className={classes.btn} size='lg' variant="danger">
+            <Link to='/order' >Order</Link>
           </Button>
         </Modal.Footer>
       </Modal>

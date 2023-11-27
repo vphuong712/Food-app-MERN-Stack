@@ -21,7 +21,7 @@ export const getAuthToken = () => {
 
 
 export const adminInfo = {
-    id: '6541c1a07717758903ca179e',
+    id: '6560cd267e146c038274e3ff',
     email: 'admin@admin.com'
 }
 

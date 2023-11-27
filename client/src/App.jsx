@@ -11,6 +11,9 @@ import ErrorPage from './pages/ErrorPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ResetPasswordPage, { loader as ResetPasswordLoader } from './pages/ResetPasswordPage.jsx';
 import { action as LogoutAction } from './pages/LogoutPage';
+import OrderPage from './pages/OrderPage.jsx';
+import OrderStatusPage, { loader as OrderStatusLoader } from './pages/OrderStatusPage.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -44,6 +47,10 @@ const router = createBrowserRouter([
         element: <BookPartyPage />,
       },
       {
+        path: 'order',
+        element : <OrderPage />,
+      },
+      {
         path: 'account',
         children: [
           {
@@ -59,12 +66,17 @@ const router = createBrowserRouter([
             path: 'reset-password',
             element: <ResetPasswordPage/>,
             loader: ResetPasswordLoader,
+          },
+          {
+            path: 'order-status',
+            element: <OrderStatusPage/>,
+            loader: OrderStatusLoader
           }
         ]
       },
       {
         path: 'logout',
-        action: LogoutAction
+        action: LogoutAction,
       }
     ],
   },

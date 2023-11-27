@@ -1,0 +1,20 @@
+.heading {
+    text-align: center;
+    margin: 14px 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 32px;
+    line-height: 38px;
+    font-family: Oswald,sans-serif;
+    font-weight: 700;
+}
+
+.order-status {
+    font-size: 6rem;
+}
+
+.order-status ul {
+    font-size: 2.4rem;
+    color: #202124;
+}
+

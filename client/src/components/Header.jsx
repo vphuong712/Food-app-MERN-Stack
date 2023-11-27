@@ -38,12 +38,12 @@ const Header = () => {
     const userNav = (
     <NavDropdown title={`${user.firstName} ${user.lastName}`} id="basic-nav-dropdown">
         {isAdmin && <NavDropdown.Item onClick={() => dispatch(showing())} >Add New Food</NavDropdown.Item>}
-        <NavDropdown.Item >Order Status</NavDropdown.Item>
-        <Link to='account/profile' >Profile</Link>    
-        <Link to='account/reset-password' >Change Password</Link>
-        <NavDropdown.Item onClick={() => {
+        <Link className='dropdown-item' to='account/order-status' >Order Status</Link>
+        <Link className='dropdown-item' to='account/profile' >Profile</Link>    
+        <Link className='dropdown-item' to='account/reset-password' >Change Password</Link>
+        <Link className='dropdown-item' onClick={() => {
             submit(null, { method: 'post', action: '/logout' })
-        }} >Logout</NavDropdown.Item>    
+        }} >Logout</Link>    
     </NavDropdown>
     );
 

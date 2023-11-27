@@ -1,4 +1,5 @@
 import User from '../models/user.js';
+import Order from '../models/order.js';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
 
@@ -151,6 +152,64 @@ export const reduceItemFromCart = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+export const postOrder = async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        const error = new Error('Request failed');
+        error.status = 422;
+        error.data = errors.array();
+        res.status(error.status).json( { message: error.message, data: error.data } );
+        return;
+    }
+    const userId = req.userId;
+    const receiver = req.body.receiver;
+    const address = req.body.address;
+    const phoneNumber = req.body.phoneNumber;
+    const orderItems = req.body.orderItems;
+    const totalPrice = req.body.totalPrice;
+
+    try {
+        const user = await User.findById(userId)
+        if(user) {
+            const order = new Order({
+                userId: user.id,
+                receiver: receiver,
+                address: address,
+                phoneNumber: phoneNumber,
+                orderItems: orderItems.map(orderItem => {
+                    return {
+                        foodId: orderItem.id,
+                        quantity: orderItem.quantity
+                    }
+                }),
+                totalPrice: totalPrice,
+                status: 'Pending'
+            })
+            await order.save();
+            res.status(200).json({ message: 'Success' })
+        }
+    } catch (error) {
+        res.status(500).json(error)
+    }
+
+}
+
+export const getOrder = async (req, res) => {
+    const userId = req.userId
+    try {
+        const order = await Order.find({ userId: userId }).populate({
+            path: 'orderItems',
+            populate: {
+              path: 'foodId',
+              model: 'Menu'
+            }
+        }).exec()
+        res.status(200).json(order);
+    } catch (error) {
         res.status(500).json(error);
     }
 }

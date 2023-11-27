@@ -32,7 +32,7 @@ const schema = new mongoose.Schema({
                 quantity: { type: Number, required: true}
             }
         ]
-    }
+    },
 });
 
 export default mongoose.model('User', schema);

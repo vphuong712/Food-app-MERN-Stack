@@ -1,0 +1,80 @@
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form h3 {
+    margin: 14px 4px;
+    line-height: 38px;
+    font-family: Oswald,sans-serif;
+    font-weight: 700;
+}
+
+form .form-group {
+    padding: 8px;
+}
+
+form .form-group label {
+    font-size: 1.6rem;
+}
+
+form .err-message {
+    margin-left: 8px;
+    color: #dc3545;
+    font-size: 1.3rem;
+}
+
+form .form-group input {
+    padding: 8px;
+}
+
+form .form-group .form-check {
+    font-size: 1.4rem;
+}
+
+form .form-group .form-check .invalid-feedback {
+    font-size: 1.3rem;
+}
+
+form .submit {
+    margin-top: 8px;
+    width: 100%;
+    border: 1px solid #e4002b;
+    border-radius: 25px;
+    line-height: 20px;
+    font-size: 1.5rem;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    padding: 8px 16px;
+}
+
+.note {
+    margin: 20px 0;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.note a {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #202124;
+}
+
+.order-body {
+    overflow-y: scroll;
+    max-height: 200px;
+}
+
+.order-body::-webkit-scrollbar {
+    display: none;
+}
+
+.total-price {
+    font-weight: 600;
+    position: absolute;
+    left: 0;
+    margin-left: 8px;
+    font-size: 1.75rem;
+}

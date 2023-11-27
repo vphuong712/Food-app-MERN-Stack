@@ -1,5 +1,14 @@
 import express from 'express';
-import { getUser, updateUser, getCart, postCart, reduceItemFromCart, resetPassword } from '../controllers/userController.js';
+import {
+    getUser,
+    updateUser,
+    getCart,
+    postCart,
+    reduceItemFromCart,
+    resetPassword,
+    postOrder,
+    getOrder
+} from '../controllers/userController.js';
 import { body } from 'express-validator';
 import isAuth from '../middlewares/is-auth.js';
 
@@ -30,6 +39,14 @@ router.get('/user/:userId/cart', isAuth, getCart);
 router.post('/user/:userId/cart', isAuth, postCart);
 
 router.patch('/user/:userId/cart', isAuth, reduceItemFromCart);
+
+router.post('/user/:userId/order', [
+    body('receiver').trim().isLength({ max: 50 }).not().isEmpty().withMessage('Please enter receiver name.'),
+    body('address').trim().isLength({ max: 50 }).not().isEmpty().withMessage('Please enter address.'),
+    body('phoneNumber').isLength({ max: 11 }).isMobilePhone().withMessage('Please enter a valid phone number.')
+], isAuth, postOrder);
+
+router.get('/user/:userId/order-status', isAuth, getOrder);
 
 
 export default router;

@@ -17,11 +17,9 @@ const FoodMenuPage = () => {
 export default FoodMenuPage;
 
 export const loader = async () => {
-    const token = getAuthToken();
-    const response = await axios.get('http://localhost:8080/menu', { 
-        headers: { 'Authorization': 'Bearer ' + token}
-    });
+    const response = await axios.get('http://localhost:8080/menu');
     if(response.status === 200) {
         return response.data;
     }
+    return null;
 };

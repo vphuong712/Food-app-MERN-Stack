@@ -2,6 +2,7 @@ import OrderStatus from "../components/Order/OrderStatus";
 import { getAuthToken } from "../util/auth";
 import axios from 'axios';
 import { useEffect } from "react";
+import { redirect } from "react-router-dom";
 
 const OrderStatusPage = () => {
     useEffect(() => {
@@ -28,5 +29,5 @@ export const loader = async () => {
             throw error;
         }
     }
-    return null;
+    return redirect('/');
 }

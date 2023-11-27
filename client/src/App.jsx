@@ -11,7 +11,7 @@ import ErrorPage from './pages/ErrorPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ResetPasswordPage, { loader as ResetPasswordLoader } from './pages/ResetPasswordPage.jsx';
 import { action as LogoutAction } from './pages/LogoutPage';
-import OrderPage from './pages/OrderPage.jsx';
+import OrderPage, { loader as OrderLoader} from './pages/OrderPage.jsx';
 import OrderStatusPage, { loader as OrderStatusLoader } from './pages/OrderStatusPage.jsx';
 
 
@@ -49,6 +49,7 @@ const router = createBrowserRouter([
       {
         path: 'order',
         element : <OrderPage />,
+        loader: OrderLoader
       },
       {
         path: 'account',

@@ -60,7 +60,7 @@ export const getItemsFromCart = createAsyncThunk('items/getItemsFromCart', async
     const userId = localStorage.getItem('userId');
 
     if(token !== 'EXPIRED' && userId) {
-        const response = await axios.get(`http://localhost:8080/user/${userId}/cart`, {
+        const response = await axios.get(`https://vphuong712-food-app.onrender.com/user/${userId}/cart`, {
             headers: {'Authorization': 'Bearer ' + token}
         })
         const foods = response.data.map(food => {
@@ -81,7 +81,7 @@ export const addItemToCart = createAsyncThunk('items/addItemsToCart', async (ite
     const token = getAuthToken();
     const userId = localStorage.getItem('userId');
     if(token && userId) {
-        const response = await axios.post(`http://localhost:8080/user/${userId}/cart`, item, {
+        const response = await axios.post(`https://vphuong712-food-app.onrender.com/user/${userId}/cart`, item, {
             headers: {'Authorization': 'Bearer ' + token}
         })
 
@@ -102,7 +102,7 @@ export const reduceItemFromCart = createAsyncThunk('items/reduceItemsFromCart', 
     const token = getAuthToken();
     const userId = localStorage.getItem('userId');
     if(token && userId) {
-        const response = await axios.patch(`http://localhost:8080/user/${userId}/cart`, item, {
+        const response = await axios.patch(`https://vphuong712-food-app.onrender.com/user/${userId}/cart`, item, {
             headers: {'Authorization': 'Bearer ' + token}
         })
 

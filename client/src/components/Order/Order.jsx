@@ -63,7 +63,7 @@ const Order = () => {
                         setIsLoading(true)
                         const token = getAuthToken();
                         try {
-                            const response = await axios.post(`http://localhost:8080/user/${user.userId}/order`,
+                            const response = await axios.post(`https://vphuong712-food-app.onrender.com/user/${user.userId}/order`,
                             {
                                 ...values,
                                 orderItems: products,

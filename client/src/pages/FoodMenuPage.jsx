@@ -17,7 +17,7 @@ const FoodMenuPage = () => {
 export default FoodMenuPage;
 
 export const loader = async () => {
-    const response = await axios.get('http://localhost:8080/menu');
+    const response = await axios.get('https://vphuong712-food-app.onrender.com/menu');
     if(response.status === 200) {
         return response.data;
     }

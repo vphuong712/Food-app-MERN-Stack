@@ -35,7 +35,7 @@ const LoginForm = () => {
                         const login = async () => {
                             setIsLoading(true);
                             try {
-                                const response = await axios.post('http://localhost:8080/auth/login',
+                                const response = await axios.post('https://vphuong712-food-app.onrender.com/auth/login',
                                 {
                                     email: values.email,
                                     password: values.password,

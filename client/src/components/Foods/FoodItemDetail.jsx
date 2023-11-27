@@ -40,7 +40,7 @@ const FoodItemDetail = () => {
             const deleteFood = async () => {
                 try {
                     const token = getAuthToken()
-                    const response = await axios.delete(`http://localhost:8080/menu/${food._id}`,{
+                    const response = await axios.delete(`https://vphuong712-food-app.onrender.com/menu/${food._id}`,{
                         headers: {'Authorization': 'Bearer ' + token},
                         data: {id: food._id}
                     });

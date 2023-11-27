@@ -46,7 +46,7 @@ const UserProfileDetail = () => {
                         try {
                             const token = getAuthToken();
                             const userId = user.userId;
-                            const response = await axios.put(`http://localhost:8080/user/${userId}`,
+                            const response = await axios.put(`https://vphuong712-food-app.onrender.com/user/${userId}`,
                             {
                                 firstName: values.firstName,
                                 lastName: values.lastName,

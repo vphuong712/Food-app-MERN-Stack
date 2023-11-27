@@ -21,7 +21,7 @@ export const loader = async () => {
     const userId = localStorage.getItem('userId');
     if(token && token !== 'EXPIRED' && userId) {
         try {
-            const response = await axios.get(`http://localhost:8080/user/${userId}/order-status`, {
+            const response = await axios.get(`https://vphuong712-food-app.onrender.com/user/${userId}/order-status`, {
                 headers: { 'Authorization': 'Bearer ' + token }
             })
             return response.data;

@@ -68,7 +68,7 @@ const EditProduct = () => {
         const updateProduct = async () => {
             try {
                 const token = getAuthToken();
-                const response = await axios.put(`http://localhost:8080/menu/${food._id}`, inputValue, {
+                const response = await axios.put(`https://vphuong712-food-app.onrender.com/menu/${food._id}`, inputValue, {
                     headers: {'Authorization': 'Bearer ' + token}
                 })
                 setIsLoading(false);

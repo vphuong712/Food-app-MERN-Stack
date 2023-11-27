@@ -42,7 +42,7 @@ const RegisterForm = () => {
                     const registerUser = async () => {
                         setIsLoading(true);
                         try {
-                            const response = await axios.put('http://localhost:8080/auth/signup', {
+                            const response = await axios.put('https://vphuong712-food-app.onrender.com/auth/signup', {
                                 firstName: values.firstName,
                                 lastName: values.lastName,
                                 address: values.address,

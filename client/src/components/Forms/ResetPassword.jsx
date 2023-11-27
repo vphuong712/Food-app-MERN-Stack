@@ -41,7 +41,7 @@ const ResetPassword = () => {
                         try {
                             const token = getAuthToken();
                             const userId = user.userId;
-                            const response = await axios.put(`http://localhost:8080/user/${userId}/reset-password`, values, {
+                            const response = await axios.put(`https://vphuong712-food-app.onrender.com/user/${userId}/reset-password`, values, {
                                 headers : { 'Authorization': 'Bearer ' + token }
                             });
                             setIsLoading(false);

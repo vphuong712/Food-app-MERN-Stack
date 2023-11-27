@@ -14,7 +14,7 @@ export const loader = async ({ params }) => {
     const userId = localStorage.getItem('userId');
     const token = getAuthToken();
     if(userId === adminId && token) {
-        const response = await axios.get(`http://localhost:8080/menu/${params.foodId}`);
+        const response = await axios.get(`https://vphuong712-food-app.onrender.com/menu/${params.foodId}`);
         if(response.status === 200){
             return response.data;
         } 

@@ -71,7 +71,7 @@ const FormComponent = () => {
         const postData = async () => {
             try {
                 const token = getAuthToken();
-                const response = await axios.post('http://localhost:8080/menu', inputValue, {
+                const response = await axios.post('https://vphuong712-food-app.onrender.com/menu', inputValue, {
                     headers: { 'Authorization': 'Bearer ' + token }
                 });
                 setIsLoading(false);

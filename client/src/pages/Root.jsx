@@ -44,7 +44,7 @@ export const loader = async () => {
     const token = getAuthToken();
     if(token) {
         const userId = localStorage.getItem('userId');
-        const response = await axios.get(`http://localhost:8080/user/${userId}`, {
+        const response = await axios.get(`https://vphuong712-food-app.onrender.com/user/${userId}`, {
             headers: {'Authorization': 'Bearer ' + token}
         })
         return response.data;

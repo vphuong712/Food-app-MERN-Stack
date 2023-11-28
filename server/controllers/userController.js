@@ -101,7 +101,6 @@ export const getCart = async (req, res) => {
         const user = await User.findById(id).populate("cart.items.foodId");
         res.status(200).json(user.cart.items);
     } catch (error) {
-        console.log(error);
         res.status(500).json(error);
     }
 }
@@ -151,7 +150,6 @@ export const reduceItemFromCart = async (req, res) => {
             res.status(200).json(food);
         }
     } catch (error) {
-        console.log(error);
         res.status(500).json(error);
     }
 }

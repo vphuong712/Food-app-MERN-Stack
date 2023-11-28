@@ -8,7 +8,6 @@ import { formatPrice } from '../../util/format';
 
 const OrderStatus = () => {
     const data = useLoaderData();
-    console.log(data);
     const rows = data.map(row => {
         return (
             <tr key={row._id}>

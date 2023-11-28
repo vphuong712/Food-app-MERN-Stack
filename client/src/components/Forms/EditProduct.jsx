@@ -72,7 +72,6 @@ const EditProduct = () => {
                     headers: {'Authorization': 'Bearer ' + token}
                 })
                 setIsLoading(false);
-                console.log(response);
                 alert(response.data.message)
                 navigate('/')
             } catch (error) {

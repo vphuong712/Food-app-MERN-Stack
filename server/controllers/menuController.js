@@ -47,7 +47,6 @@ export const updateFood = async (req, res) => {
     const title = req.body.title
     const price = +req.body.price
     const description = req.body.description
-    console.log(req.body);
 
     try {
         if(imageUrl !== '' && title !== '' && description !== '' && price > 0) {
@@ -62,7 +61,6 @@ export const updateFood = async (req, res) => {
             res.status(422).json({ message: 'Invalid Input!' });   
         }
     } catch (error) {
-        console.log(error);
         res.status(500).json(error);
     }
 }

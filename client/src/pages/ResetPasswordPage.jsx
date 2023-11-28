@@ -12,7 +12,6 @@ export default ResetPasswordPage;
 
 export const loader = () => {
     const token = getAuthToken();
-    console.log(token);
     if(!token || token === 'EXPIRED') {
         return redirect('/')
     }

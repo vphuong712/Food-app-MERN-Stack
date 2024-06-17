@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/app
+      - node_modules_client:/app/node_modules
+    networks:
+      - react-express
+    depends_on:
+      - server
+  
+  server:
+    restart: always
+    build: ./server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./server:/app
+      - node_modules_server:/app/node_modules
+    networks:
+      - react-express
+      - express-mongo
+    depends_on:
+      - mongo
+    expose:
+      - "3000"
+  
+  mongo:
+    restart: always
+    image: mongo:4.2.0
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - express-mongo
+    expose:
+      - "27017"
+  
+networks:
+  react-express:
+  express-mongo:
+
+volumes:
+  node_modules_client:
+  node_modules_server:
+  mongo_data:
